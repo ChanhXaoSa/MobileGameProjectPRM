@@ -43,14 +43,12 @@ public class MainActivity extends AppCompatActivity {
         btnDangNhap.setOnClickListener(view -> {
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-            finish();
         });
     }
     private void clickBtnDangKi() {
         btnDangKi.setOnClickListener(view -> {
             intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
-            finish();
         });
     }
 }
