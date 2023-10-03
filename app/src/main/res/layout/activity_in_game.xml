@@ -8,35 +8,72 @@
     tools:context=".InGameActivity">
 
     <EditText
-        android:id="@+id/etnCar3"
+        android:id="@+id/etnCar2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
         android:ems="10"
+        android:hint="   Car 2"
         android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnCar2" />
+        app:layout_constraintTop_toBottomOf="@+id/etnCar1"
+        android:drawableLeft="@drawable/car2"/>
+
+    <Button
+        android:id="@+id/btnBet"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:text="Bet"
+        android:textStyle="bold"
+        app:cornerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etnCar3"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/etnCar1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="50dp"
         android:ems="10"
+        android:background="#FFFFFF"
+        android:hint="   Car 1"
         android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBalance"
+        android:drawableLeft="@drawable/car1"/>
 
     <EditText
-        android:id="@+id/etnCar2"
+        android:id="@+id/etnCar3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
         android:ems="10"
+        android:hint="   Car 3"
         android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnCar1" />
+        app:layout_constraintTop_toBottomOf="@+id/etnCar2"
+        android:drawableLeft="@drawable/car3"/>
+
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="209dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/sbCar2"
@@ -93,27 +130,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvBalance"
-        android:layout_width="209dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="52dp"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnBet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bet"
-        app:cornerRadius="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/etnCar3"
-        app:layout_constraintStart_toStartOf="@+id/etnCar3"
-        app:layout_constraintTop_toBottomOf="@+id/etnCar3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
