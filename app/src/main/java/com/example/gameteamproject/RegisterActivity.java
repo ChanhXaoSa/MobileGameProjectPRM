@@ -3,6 +3,7 @@ package com.example.gameteamproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -48,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Password are not match", Toast.LENGTH_LONG).show();
             return false;
         }
+        // Save the user data
+        saveUserData(etUsername.getText().toString(), etPassword.getText().toString());
         return true;
     }
 
@@ -60,5 +63,21 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InGameActivity.class);
         startActivity(intent);
         finish();   // đóng màn hình đang chạy
+    }
+
+    // Lưu dữ liệu tài khoản
+    private void saveUserData(String username, String password) {
+        // Get the SharedPreferences object
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+
+        // Create an editor for the SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Put the user data in the SharedPreferences
+        editor.putString("username", username);
+        editor.putString("password", password);
+
+        // Apply the changes
+        editor.apply();
     }
 }

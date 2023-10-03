@@ -3,6 +3,7 @@ package com.example.gameteamproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -53,12 +54,17 @@ public class LoginActivity extends AppCompatActivity {
         if(!checkInput()){
             return;
         }
-        if(!etUsername.getText().toString().equals("admin")){
+
+        // Get the saved user data
+        String username = getUsername();
+        String password = getPassword();
+
+        if(!etUsername.getText().toString().equals("admin") && !etUsername.getText().toString().equals(username)){
             Toast.makeText(this, "Username does not exits", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(!etPassword.getText().toString().equals("12345")){
+        if(!etPassword.getText().toString().equals("12345") && !etPassword.getText().toString().equals(password)){
             Toast.makeText(this, "Password wrong", Toast.LENGTH_LONG).show();
             return;
         }
@@ -66,5 +72,25 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InGameActivity.class);
         startActivity(intent);
         finish();   // đóng màn hình đang chạy
+    }
+
+    private String getUsername() {
+        // Get the SharedPreferences object
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+
+        // Get the username from the SharedPreferences
+        String username = sharedPreferences.getString("username", "");
+
+        return username;
+    }
+
+    private String getPassword() {
+        // Get the SharedPreferences object
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+
+        // Get the password from the SharedPreferences
+        String password = sharedPreferences.getString("password", "");
+
+        return password;
     }
 }
