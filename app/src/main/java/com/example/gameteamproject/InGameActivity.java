@@ -65,9 +65,11 @@ public class InGameActivity extends AppCompatActivity {
         btnBet.setOnClickListener(view -> {
             if (!etnCar1.getText().toString().trim().isEmpty()) {
                 account.setMoney(account.getMoney() - Integer.parseInt(etnCar1.getText().toString()));
-            } else if (!etnCar2.getText().toString().trim().isEmpty()) {
+            }
+            if (!etnCar2.getText().toString().trim().isEmpty()) {
                 account.setMoney(account.getMoney() - Integer.parseInt(etnCar2.getText().toString()));
-            } else if (!etnCar3.getText().toString().trim().isEmpty()) {
+            }
+            if (!etnCar3.getText().toString().trim().isEmpty()) {
                 account.setMoney(account.getMoney() - Integer.parseInt(etnCar3.getText().toString()));
             }
             showBalance();
