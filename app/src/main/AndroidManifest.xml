@@ -25,7 +25,6 @@
         <activity
              android:name=".InGameActivity"
              android:exported="false" />
-
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
