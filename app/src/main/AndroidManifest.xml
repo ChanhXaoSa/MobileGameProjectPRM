@@ -22,9 +22,16 @@
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
+<<<<<<< Updated upstream
         <activity
              android:name=".InGameActivity"
              android:exported="false" />
+=======
+
+        <!-- <activity -->
+        <!-- android:name=".InGameActivity" -->
+        <!-- android:exported="false" /> -->
+>>>>>>> Stashed changes
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
