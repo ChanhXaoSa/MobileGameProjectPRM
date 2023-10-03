@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void clickBtnDangNhap() {
         btnDangNhap.setOnClickListener(view -> {
-            intent = new Intent(this, InGameActivity.class);
+            intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         });
     }
     private void clickBtnDangKi() {
         btnDangKi.setOnClickListener(view -> {
-            intent = new Intent(this, InGameActivity.class);
+            intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
             finish();
         });
