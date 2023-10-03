@@ -1,5 +1,6 @@
 package com.example.gameteamproject;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -31,11 +32,13 @@ public class InGameActivity extends AppCompatActivity {
     private boolean isRunning = false;
     private boolean isFinished = false;
 
+    private MediaPlayer mediaPlayer;
+    private MediaPlayer clickSound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
-
+        clickSound = MediaPlayer.create(this, R.raw.click);
         anhXa();
         betAction();
         startAction();
@@ -60,6 +63,9 @@ public class InGameActivity extends AppCompatActivity {
         btnStart.setOnClickListener(view -> {
             if (!isRunning) {
                 startProcessBar();
+                mediaPlayer = MediaPlayer.create(this, R.raw.running);
+                mediaPlayer.start();
+                clickSound.start();
                 isRunning = true;
                 isFinished = false;
                 btnStart.setEnabled(false);
@@ -68,6 +74,7 @@ public class InGameActivity extends AppCompatActivity {
                 isRunning = false;
             }
         });
+
     }
     private void betAction() {
         btnBet.setOnClickListener(view -> {
@@ -84,6 +91,7 @@ public class InGameActivity extends AppCompatActivity {
                 account.setMoney(account.getMoney() - betCar3);
             }
             showBalance();
+            clickSound.start();
         });
     }
     private void clearBet() {
@@ -176,6 +184,9 @@ public class InGameActivity extends AppCompatActivity {
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
+        mediaPlayer.stop();
+        mediaPlayer = MediaPlayer.create(this, R.raw.tada);
+        mediaPlayer.start();
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
         popupView.setOnTouchListener((view, motionEvent) -> {
