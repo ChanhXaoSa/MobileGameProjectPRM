@@ -2,8 +2,13 @@ package com.example.gameteamproject;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -13,10 +18,11 @@ import java.util.Random;
 
 public class InGameActivity extends AppCompatActivity {
     private final Account account = new Account("a","a",100000);
-    private TextView tvBalance;
+    private TextView tvBalance, tvWinnerCarName, tvWinnerMoneyGet;
     private Button btnBet;
     private EditText etnCar1, etnCar2, etnCar3;
     private int betCar1, betCar2, betCar3;
+    private int totalMoneyGet = 0;
     private SeekBar sbCar1,sbCar2,sbCar3;
     private Button btnStart;
     private final int TARGET_PROGRESS = 100;
@@ -87,6 +93,7 @@ public class InGameActivity extends AppCompatActivity {
         betCar1 = 0;
         betCar2 = 0;
         betCar3 = 0;
+        totalMoneyGet = 0;
     }
     private void startProcessBar() {
         sbCar1.setProgress(0);
@@ -123,18 +130,32 @@ public class InGameActivity extends AppCompatActivity {
                     if (!isFinished) {
                         handler.postDelayed(this, 50);
                     } else {
+                        winnerResultOpen();
                         if (progress1 >= TARGET_PROGRESS) {
+                            tvWinnerCarName.setText("Car 1 win the race!!!");
                             if (betCar1 != 0) {
                                 account.setMoney(account.getMoney() + betCar1 * 2);
+                                totalMoneyGet = totalMoneyGet + betCar1 - betCar2 - betCar3;
                             }
                         } else if (progress2 >= TARGET_PROGRESS) {
+                            tvWinnerCarName.setText("Car 2 win the race!!!");
                             if (betCar2 != 0) {
                                 account.setMoney(account.getMoney() + betCar2 * 2);
+                                totalMoneyGet = totalMoneyGet - betCar1 + betCar2 - betCar3;
                             }
                         } else {
+                            tvWinnerCarName.setText("Car 3 win the race!!!");
                             if (betCar3 != 0) {
                                 account.setMoney(account.getMoney() + betCar3 * 2);
+                                totalMoneyGet = totalMoneyGet - betCar1 - betCar2 + betCar3;
                             }
+                        }
+                        if (betCar1 == 0 && betCar2 == 0 && betCar3 == 0) {
+                            tvWinnerMoneyGet.setText("You are not participating in betting on this race !");
+                        } else if (totalMoneyGet < 0) {
+                            tvWinnerMoneyGet.setText("You lost " + totalMoneyGet*-1);
+                        } else {
+                            tvWinnerMoneyGet.setText("You earn " + totalMoneyGet);
                         }
                         showBalance();
                         clearBet();
@@ -147,6 +168,22 @@ public class InGameActivity extends AppCompatActivity {
         };
         handler.post(runnable);
     }
+    private void winnerResultOpen() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.activity_winner_popup, null);
+        tvWinnerMoneyGet = popupView.findViewById(R.id.tvWinnerMoneyGet);
+        tvWinnerCarName = popupView.findViewById(R.id.tvWinnerCarName);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+        popupView.setOnTouchListener((view, motionEvent) -> {
+            popupWindow.dismiss();
+            return true;
+        });
+    }
+
     private void stopProgressBar() {
         handler.removeCallbacksAndMessages(null);
     }
