@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 public class InGameActivity extends AppCompatActivity {
-    private Account account = new Account("a","a",100000);
+    private final Account account = new Account("a","a",100000);
     private TextView tvBalance;
     private Button btnBet;
     private EditText etnCar1, etnCar2, etnCar3;
+    private int betCar1, betCar2, betCar3;
     private SeekBar sbCar1,sbCar2,sbCar3;
     private Button btnStart;
     private final int TARGET_PROGRESS = 100;
@@ -46,7 +47,8 @@ public class InGameActivity extends AppCompatActivity {
         btnStart = findViewById(R.id.btnStart);
     }
     private void showBalance() {
-        tvBalance.setText("Balance:" + account.getMoney());
+        String string = "Balance" + account.getMoney();
+        tvBalance.setText(string);
     }
     private void startAction() {
         btnStart.setOnClickListener(view -> {
@@ -64,13 +66,16 @@ public class InGameActivity extends AppCompatActivity {
     private void betAction() {
         btnBet.setOnClickListener(view -> {
             if (!etnCar1.getText().toString().trim().isEmpty()) {
-                account.setMoney(account.getMoney() - Integer.parseInt(etnCar1.getText().toString()));
+                betCar1 = Integer.parseInt(etnCar1.getText().toString());
+                account.setMoney(account.getMoney() - betCar1);
             }
             if (!etnCar2.getText().toString().trim().isEmpty()) {
-                account.setMoney(account.getMoney() - Integer.parseInt(etnCar2.getText().toString()));
+                betCar2 = Integer.parseInt(etnCar2.getText().toString());
+                account.setMoney(account.getMoney() - betCar2);
             }
             if (!etnCar3.getText().toString().trim().isEmpty()) {
-                account.setMoney(account.getMoney() - Integer.parseInt(etnCar3.getText().toString()));
+                betCar3 = Integer.parseInt(etnCar3.getText().toString());
+                account.setMoney(account.getMoney() - betCar3);
             }
             showBalance();
         });
@@ -79,6 +84,9 @@ public class InGameActivity extends AppCompatActivity {
         etnCar1.setText("");
         etnCar2.setText("");
         etnCar3.setText("");
+        betCar1 = 0;
+        betCar2 = 0;
+        betCar3 = 0;
     }
     private void startProcessBar() {
         sbCar1.setProgress(0);
@@ -116,16 +124,16 @@ public class InGameActivity extends AppCompatActivity {
                         handler.postDelayed(this, 50);
                     } else {
                         if (progress1 >= TARGET_PROGRESS) {
-                            if (!etnCar1.getText().toString().trim().isEmpty()) {
-                                account.setMoney(account.getMoney() + Integer.parseInt(etnCar1.getText().toString()) * 2);
+                            if (betCar1 != 0) {
+                                account.setMoney(account.getMoney() + betCar1 * 2);
                             }
                         } else if (progress2 >= TARGET_PROGRESS) {
-                            if (!etnCar2.getText().toString().trim().isEmpty()) {
-                                account.setMoney(account.getMoney() + Integer.parseInt(etnCar2.getText().toString()) * 2);
+                            if (betCar2 != 0) {
+                                account.setMoney(account.getMoney() + betCar2 * 2);
                             }
                         } else {
-                            if (!etnCar3.getText().toString().trim().isEmpty()) {
-                                account.setMoney(account.getMoney() + Integer.parseInt(etnCar3.getText().toString()) * 2);
+                            if (betCar3 != 0) {
+                                account.setMoney(account.getMoney() + betCar3 * 2);
                             }
                         }
                         showBalance();
