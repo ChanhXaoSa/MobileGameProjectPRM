@@ -25,7 +25,7 @@ public class InGameActivity extends AppCompatActivity {
     private int totalMoneyGet = 0;
     private SeekBar sbCar1,sbCar2,sbCar3;
     private Button btnStart;
-    private final int TARGET_PROGRESS = 100;
+    private final int TARGET_PROGRESS = 1000;
     private final Handler handler = new Handler();
     private final Random random = new Random();
     private boolean isRunning = false;
@@ -109,17 +109,17 @@ public class InGameActivity extends AppCompatActivity {
             public void run() {
                 if (!isFinished) {
                     if (progress1 < TARGET_PROGRESS) {
-                        progress1 += random.nextInt(10) + 1;
+                        progress1 += random.nextInt(20) + 1;
                         sbCar1.setProgress(progress1);
                     }
 
                     if (progress2 < TARGET_PROGRESS) {
-                        progress2 += random.nextInt(10) + 1;
+                        progress2 += random.nextInt(20) + 1;
                         sbCar2.setProgress(progress2);
                     }
 
                     if (progress3 < TARGET_PROGRESS) {
-                        progress3 += random.nextInt(10) + 1;
+                        progress3 += random.nextInt(20) + 1;
                         sbCar3.setProgress(progress3);
                     }
 
