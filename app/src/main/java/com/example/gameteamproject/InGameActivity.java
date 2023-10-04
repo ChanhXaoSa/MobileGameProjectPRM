@@ -236,6 +236,9 @@ public class InGameActivity extends AppCompatActivity {
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
         popupView.setOnTouchListener((view, motionEvent) -> {
             popupWindow.dismiss();
+            sbCar1.setProgress(0);
+            sbCar2.setProgress(0);
+            sbCar3.setProgress(0);
             return true;
         });
     }
