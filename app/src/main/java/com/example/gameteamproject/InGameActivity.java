@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,7 +57,7 @@ public class InGameActivity extends AppCompatActivity {
         btnStart = findViewById(R.id.btnStart);
     }
     private void showBalance() {
-        String string = "Balance" + account.getMoney();
+        String string = "Balance " + account.getMoney() + "$";
         tvBalance.setText(string);
     }
     private void startAction() {
@@ -77,6 +78,10 @@ public class InGameActivity extends AppCompatActivity {
 
     }
     private void betAction() {
+        if (betCar1 < 0 || betCar2 < 0 || betCar3 < 0) {
+            Toast.makeText(this, "Bet amount cannot be less than 0!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         btnBet.setOnClickListener(view -> {
             if (!etnCar1.getText().toString().trim().isEmpty()) {
                 betCar1 = Integer.parseInt(etnCar1.getText().toString());
@@ -161,9 +166,9 @@ public class InGameActivity extends AppCompatActivity {
                         if (betCar1 == 0 && betCar2 == 0 && betCar3 == 0) {
                             tvWinnerMoneyGet.setText("You are not participating in betting on this race !");
                         } else if (totalMoneyGet < 0) {
-                            tvWinnerMoneyGet.setText("You lost " + totalMoneyGet*-1);
+                            tvWinnerMoneyGet.setText("You lost " + totalMoneyGet*-1 +"$");
                         } else {
-                            tvWinnerMoneyGet.setText("You earn " + totalMoneyGet);
+                            tvWinnerMoneyGet.setText("You earn " + totalMoneyGet + "$");
                         }
                         showBalance();
                         clearBet();
