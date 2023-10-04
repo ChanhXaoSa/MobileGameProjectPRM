@@ -85,15 +85,17 @@ public class InGameActivity extends AppCompatActivity {
         btnBet.setOnClickListener(view -> {
             if (!etnCar1.getText().toString().trim().isEmpty()) {
                 betCar1 = Integer.parseInt(etnCar1.getText().toString());
-                account.setMoney(account.getMoney() - betCar1);
             }
             if (!etnCar2.getText().toString().trim().isEmpty()) {
                 betCar2 = Integer.parseInt(etnCar2.getText().toString());
-                account.setMoney(account.getMoney() - betCar2);
             }
             if (!etnCar3.getText().toString().trim().isEmpty()) {
                 betCar3 = Integer.parseInt(etnCar3.getText().toString());
-                account.setMoney(account.getMoney() - betCar3);
+            }
+            if (account.getMoney() < (betCar1 + betCar2 + betCar3)) {
+                Toast.makeText(this, "You do not have enought money!", Toast.LENGTH_SHORT).show();
+            } else {
+                account.setMoney(account.getMoney() - (betCar1 + betCar2 + betCar3));
             }
             showBalance();
             clickSound.start();
@@ -148,20 +150,20 @@ public class InGameActivity extends AppCompatActivity {
                             tvWinnerCarName.setText("Car 1 win the race!!!");
                             if (betCar1 != 0) {
                                 account.setMoney(account.getMoney() + betCar1 * 2);
-                                totalMoneyGet = totalMoneyGet + betCar1 - betCar2 - betCar3;
                             }
+                            totalMoneyGet = totalMoneyGet + betCar1*2 - betCar2 - betCar3;
                         } else if (progress2 >= TARGET_PROGRESS) {
                             tvWinnerCarName.setText("Car 2 win the race!!!");
                             if (betCar2 != 0) {
                                 account.setMoney(account.getMoney() + betCar2 * 2);
-                                totalMoneyGet = totalMoneyGet - betCar1 + betCar2 - betCar3;
                             }
+                            totalMoneyGet = totalMoneyGet + betCar2*2 - betCar3 - betCar1;
                         } else {
                             tvWinnerCarName.setText("Car 3 win the race!!!");
                             if (betCar3 != 0) {
                                 account.setMoney(account.getMoney() + betCar3 * 2);
-                                totalMoneyGet = totalMoneyGet - betCar1 - betCar2 + betCar3;
                             }
+                            totalMoneyGet = totalMoneyGet + betCar3*2 - betCar1 - betCar2;
                         }
                         if (betCar1 == 0 && betCar2 == 0 && betCar3 == 0) {
                             tvWinnerMoneyGet.setText("You are not participating in betting on this race !");
