@@ -114,6 +114,7 @@ public class InGameActivity extends AppCompatActivity {
             if (!etnCar3.getText().toString().trim().isEmpty()) {
                 betCar3 = Integer.parseInt(etnCar3.getText().toString());
             }
+
             if (account.getMoney() < (betCar1 + betCar2 + betCar3)) {
                 Toast.makeText(this, "You do not have enough money!", Toast.LENGTH_SHORT).show();
             } else {
@@ -123,6 +124,9 @@ public class InGameActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bet amount cannot be less than 0!", Toast.LENGTH_SHORT).show();
                 return;
             }
+            Toast.makeText(this, "Bet successfully!", Toast.LENGTH_SHORT).show();
+
+
             showBalance();
             clickSound.start();
         });
