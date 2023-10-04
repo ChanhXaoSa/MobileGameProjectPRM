@@ -33,6 +33,7 @@ public class InGameActivity extends AppCompatActivity {
     private final Random random = new Random();
     private boolean isRunning = false;
     private boolean isFinished = false;
+    private boolean isBet = false;
 
     private MediaPlayer mediaPlayer;
     private MediaPlayer clickSound;
@@ -70,6 +71,7 @@ public class InGameActivity extends AppCompatActivity {
     }
     private void startAction() {
         btnStart.setOnClickListener(view -> {
+            isBet = false;
             if (!isRunning) {
                 startProcessBar();
                 mediaPlayer = MediaPlayer.create(this, R.raw.running);
@@ -85,12 +87,32 @@ public class InGameActivity extends AppCompatActivity {
         });
 
     }
+
+
     private void betAction() {
-        if (betCar1 < 0 || betCar2 < 0 || betCar3 < 0) {
-            Toast.makeText(this, "Bet amount cannot be less than 0!", Toast.LENGTH_SHORT).show();
-            return;
-        }
         btnBet.setOnClickListener(view -> {
+            if(isBet == true){
+                Toast.makeText(this, "Bet 1 lần r :)!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            isBet = true;
+            if(etnCar1.getText().toString().trim().length() > 9)
+            {
+                Toast.makeText(this, "Giàu vậy ba!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(etnCar2.getText().toString().trim().length() > 9)
+            {
+                Toast.makeText(this, "Giàu vậy ba!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(etnCar3.getText().toString().trim().length() > 9)
+            {
+                Toast.makeText(this, "Giàu vậy ba!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
             if (!etnCar1.getText().toString().trim().isEmpty()) {
                 betCar1 = Integer.parseInt(etnCar1.getText().toString());
             }
@@ -100,11 +122,19 @@ public class InGameActivity extends AppCompatActivity {
             if (!etnCar3.getText().toString().trim().isEmpty()) {
                 betCar3 = Integer.parseInt(etnCar3.getText().toString());
             }
+
             if (account.getMoney() < (betCar1 + betCar2 + betCar3)) {
-                Toast.makeText(this, "You do not have enought money!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You do not have enough money!", Toast.LENGTH_SHORT).show();
             } else {
                 account.setMoney(account.getMoney() - (betCar1 + betCar2 + betCar3));
             }
+            if (betCar1 < 0 || betCar2 < 0 || betCar3 < 0) {
+                Toast.makeText(this, "Bet amount cannot be less than 0!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, "Bet successfully!", Toast.LENGTH_SHORT).show();
+
+
             showBalance();
             clickSound.start();
         });
