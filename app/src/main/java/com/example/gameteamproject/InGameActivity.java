@@ -1,5 +1,6 @@
 package com.example.gameteamproject;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,7 @@ import java.util.Random;
 public class InGameActivity extends AppCompatActivity {
     private final Account account = new Account("a","a",100000);
     private TextView tvBalance, tvWinnerCarName, tvWinnerMoneyGet;
-    private Button btnBet;
+    private Button btnBet, btnTutorial;
     private EditText etnCar1, etnCar2, etnCar3;
     private int betCar1, betCar2, betCar3;
     private int totalMoneyGet = 0;
@@ -44,6 +45,12 @@ public class InGameActivity extends AppCompatActivity {
         betAction();
         startAction();
         showBalance();
+        btnTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTutorial();
+            }
+        });
     }
     private void anhXa() {
         tvBalance = findViewById(R.id.tvBalance);
@@ -55,6 +62,7 @@ public class InGameActivity extends AppCompatActivity {
         sbCar2 = findViewById(R.id.sbCar2);
         sbCar3 = findViewById(R.id.sbCar3);
         btnStart = findViewById(R.id.btnStart);
+        btnTutorial = findViewById(R.id.btnTutorial);
     }
     private void showBalance() {
         String string = "Balance " + account.getMoney() + "$";
@@ -204,5 +212,10 @@ public class InGameActivity extends AppCompatActivity {
 
     private void stopProgressBar() {
         handler.removeCallbacksAndMessages(null);
+    }
+
+    private void showTutorial(){
+        Intent intent = new Intent(this, Tutorial.class);
+        startActivity(intent);
     }
 }
