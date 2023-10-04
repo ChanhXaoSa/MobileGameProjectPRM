@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         // Start Main Activity
-        Intent intent = new Intent(this, InGameActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();   // đóng màn hình đang chạy
     }
