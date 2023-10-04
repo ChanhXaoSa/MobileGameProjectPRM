@@ -92,23 +92,23 @@ public class InGameActivity extends AppCompatActivity {
     private void betAction() {
         btnBet.setOnClickListener(view -> {
             if(isBet == true){
-                Toast.makeText(this, "Bet 1 lần r :)!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Only bet one time!", Toast.LENGTH_SHORT).show();
                 return;
             }
             isBet = true;
             if(etnCar1.getText().toString().trim().length() > 9)
             {
-                Toast.makeText(this, "Giàu vậy ba!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please order less, we don't have the money!", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(etnCar2.getText().toString().trim().length() > 9)
             {
-                Toast.makeText(this, "Giàu vậy ba!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please order less, we don't have the money!", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(etnCar3.getText().toString().trim().length() > 9)
             {
-                Toast.makeText(this, "Giàu vậy ba!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please order less, we don't have the money!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
